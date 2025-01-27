@@ -31,7 +31,7 @@
         public function imprimir():string
         {
             return parent::imprimir().
-                "<br>Total: ". $this->salario;
+                "<br>Salario: ". $this->salario;
         }//Fim do método
 
 

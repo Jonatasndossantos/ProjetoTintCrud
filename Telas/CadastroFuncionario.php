@@ -2,8 +2,12 @@
     namespace PHP\Modelo\Tela;
 
     require_once('..\Funcionario.php');
+    require_once('..\DAO\Conexao.php');
+    require_once('..\DAO\Inserir.php');
 
     use PHP\Modelo\Funcionario;
+    use PHP\Modelo\DAO\Conexao;
+    use PHP\Modelo\DAO\Inserir;
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -39,35 +43,35 @@
             </div>
 
             <div class="mb-3">
-              <label for="lTotal" class="form-label">Total De Compras</label>
-              <input type="text" class="form-control" name="tTotal" id="tTotal" placeholder="999999">
+              <label for="lTotal" class="form-label">Salario</label>
+              <input type="text" class="form-control" name="tSalario" id="tSalario" placeholder="999999">
             </div>
             <button type="submit">Cadastrar
                 <?php
-                    if(isset($_POST['tCpf'])&&
-                      isset($_POST['tNome'])&&
-                      isset($_POST['tTelefone'])&&
-                      isset($_POST['tEndereco'])&&
-                      isset($_POST['tTotal']))
-                      {
-                      $cpf      = $_POST ['tCpf'];
-                      $nome     = $_POST ['tNome'] ;
-                      $telefone = $_POST ['tTelefone'];
-                      $endereco = $_POST ['tEndereco'];
-                      $salario  = $_POST ['tTotal'];
+                  $conexao = new Conexao();
+                   if(isset($_POST['tCpf'])&&
+                   isset($_POST['tNome'])&&
+                   isset($_POST['tTelefone'])&&
+                   isset($_POST['tEndereco'])&&
+                   isset($_POST['tSalario'])){  
+                    $cpf      = $_POST ['tCpf'];
+                    $nome     = $_POST ['tNome'] ;
+                    $telefone = $_POST ['tTelefone'];
+                    $endereco = $_POST ['tEndereco'];
+                    $salario  = $_POST ['tSalario'];
                       
-                      $funcionario1 = new Funcionario($cpf,
-                                                      $nome,
-                                                      $telefone,
-                                                      $endereco,
-                                                      $salario);
-                    }
+                      //Instanciar
+                    $inserir = new Inserir();
+                    echo $inserir->cadastrarFuncionario($conexao,
+                                                        $cpf,
+                                                        $nome,
+                                                        $telefone,
+                                                        $endereco,
+                                                        $salario);
+                   }
                 ?>
             </button>
         </form>
-        <?php
-            echo $funcionario1->imprimir();
-        ?>
     
     </div>
 

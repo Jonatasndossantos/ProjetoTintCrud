@@ -2,8 +2,14 @@
     namespace PHP\Modelo\Tela;
 
     require_once('..\Cliente.php');
+    require_once('..\DAO\Conexao.php');
+    require_once('..\DAO\Inserir.php');
+    
 
     use PHP\Modelo\Cliente;
+    use PHP\Modelo\DAO\Conexao;
+    use PHP\Modelo\DAO\Inserir;
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -44,26 +50,30 @@
             </div>
             <button type="submit">Cadastrar
                 <?php
-                    try{
+                  $conexao = new Conexao();//Conectar no Banco
+                  if(isset($_POST['tCpf'])&&
+                  isset($_POST['tNome'])&&
+                  isset($_POST['tTelefone'])&&
+                  isset($_POST['tEndereco'])&&
+                  isset($_POST['tTotal'])){
                     $cpf      = $_POST ['tCpf'];
                     $nome     = $_POST ['tNome'] ;
                     $telefone = $_POST ['tTelefone'];
                     $endereco = $_POST ['tEndereco'];
                     $total    = $_POST ['tTotal'];
 
-                    $clientel = new Cliente($cpf,
-                                            $nome,
-                                            $telefone,
-                                            $endereco,
-                                            $total);
-                    }catch
+                  //Instanciar
+                  $inserir = new Inserir();
+                  echo $inserir->cadastrarCliente($conexao,
+                                                   $cpf,
+                                                   $nome,
+                                                   $telefone,
+                                                   $endereco,
+                                                   $total);
+                  }
                 ?>
             </button>
         </form>
-        <?php
-            echo $clientel->imprimir();
-        ?>
-    
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
