@@ -12,15 +12,15 @@
             try{
                 $conn = $conexao->conectar();
                 $sql  = "select * from cliente where codigo = '$cpf'";
-                $result = myslqi_query($conn, $sql);
+                $result = mysqli_query($conn, $sql);
 
                 while($dados = mysqli_fetch_Array($result)){
                     if($dados['codigo'] == $cpf){
-                        echo "<br>CPF: ".$dados['cpf'].
+                        echo "<br>CPF: ".$dados['codigo'].
                              "<br>Nome: ".$dados['nome'].
                              "<br>Telefone: ".$dados['telefone'].
                              "<br>Endereco: ".$dados['endereco'].
-                             "<br>Total: ".$dados['Total'];
+                             "<br>Total: ".$dados['total'];
                         return;//Finalizar o while
                     }
                     return "código digitado invalido!";
@@ -29,6 +29,31 @@
                 echo $erro;
             }
         }//fim do consultarClienteIndividual
+
+        function consultarFuncionarioIndividual(
+            Conexao $conexao,
+            int $cpf
+        ){
+            try{
+                $conn = $conexao->conectar();
+                $sql  = "select * from Funcionario where codigo = '$cpf'";
+                $result = mysqli_query($conn, $sql);
+
+                while($dados = mysqli_fetch_Array($result)){
+                    if($dados['codigo'] == $cpf){
+                        echo "<br>CPF: ".$dados['codigo'].
+                             "<br>Nome: ".$dados['nome'].
+                             "<br>Telefone: ".$dados['telefone'].
+                             "<br>Endereco: ".$dados['endereco'].
+                             "<br>Salario: ".$dados['salario'];
+                        return;//Finalizar o while
+                    }
+                    return "código digitado invalido!";
+                }
+            }catch(Except $erro){
+                echo $erro;
+            }
+        }//fim do consultarFuncionarioIndividual
     }//fim da classe
 
 

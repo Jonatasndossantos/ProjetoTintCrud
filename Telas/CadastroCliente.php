@@ -1,5 +1,5 @@
 <?php
-    namespace PHP\Modelo\Tela;
+    namespace PHP\Modelo\Telas;
 
     require_once('..\Cliente.php');
     require_once('..\DAO\Conexao.php');

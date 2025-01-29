@@ -1,11 +1,9 @@
 <?php
-    namespace PHP\Modelo\Telas;
-    require_once('..\DAO\Consultar.php');
-    require_once('..\DAO\Conexao.php');
-    use PHP\Modelo\DAO\Consultar;
-    use PHP\Modelo\DAO\Conexao;
-
-
+        namespace PHP\Modelo\Telas;
+        require_once('..\DAO\Excluir.php');
+        require_once('..\DAO\Conexao.php');
+        use PHP\Modelo\DAO\Excluir;
+        use PHP\Modelo\DAO\Conexao;
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -13,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consultar Cliente</title>
+    <title>Excluir Cliente</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 </head>
@@ -21,12 +19,12 @@
     <form method="POST">
         <label>Informe um CPF</label>
         <input type="text" name="tCpf"/>
-        <button type="submit">Consultar
+        <button type="submit">Excluir
             <?php
             if(isset($_POST['tCpf'])){
                 $conexao   = new Conexao();
                 $cpf       = $_POST['tCpf'];
-                $consultar = new Consultar();
+                $excluir = new Excluir();
             }          
             ?>
         </button>
@@ -35,7 +33,7 @@
 
     <?php
         if(isset($_POST['tCpf'])){
-            echo $consultar->consultarClienteIndividual($conexao, $cpf);
+            echo $excluir->excluirCliente($conexao, $cpf);
         }else{
             echo "Preencha o campo CPF";
         }
